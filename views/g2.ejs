@@ -24,75 +24,77 @@
     <!-- Main Content-->
     <hr/>
     <main>
-        <div class="fillup-form">
-            <div class="personal-info">
-                <div class="item-1">
-                    <div class="input-group">
-                        <input type="text" id="fName" required class="input">
-                        <label for="first-name" class="input-label">First Name</label>
-                    </div>
-                </div>
-                <div class="item-1">
-                    <div class="input-group">
-                        <input type="text" id="lName" required class="input">
-                        <label for="last-name" class="input-label">Last Name</label>
-                    </div>
-                </div>
-                <div class="item-1">
-                    <div class="input-group">
-                        <input type="number" id="lNumber" required class="input">
-                        <label for="License-number" class="input-label">License-Number</label>
-                    </div>
-                </div>
-                <div class="item-1">
-                    <div class="input-group">
-                        <input type="number" id="age" required class="input">
-                        <label for="age" class="input-label" min="18" max="99">Age</label>
-                    </div>
-                </div>
-                <div class="item-1">
-                    <div class="date-piker">
-                        <div class="date-label">
-                            Date
-                        </div>
+        <form action="/g2/addData" method="POST">
+            <div class="fillup-form">
+                <div class="personal-info">
+                    <div class="item-1">
                         <div class="input-group">
-                            <input type="date" id="date" required class="input">
-                            <label for="date" class="input-label"></label>
+                            <input type="text" id="fName" name="fName" required class="input">
+                            <label for="first-name" class="input-label">First Name</label>
                         </div>
                     </div>
+                    <div class="item-1">
+                        <div class="input-group">
+                            <input type="text" id="lName" name="lName" required class="input">
+                            <label for="last-name" class="input-label">Last Name</label>
+                        </div>
+                    </div>
+                    <div class="item-1">
+                        <div class="input-group">
+                            <input type="number" id="lNumber" name="lNumber" required class="input">
+                            <label for="License-number" class="input-label">License-Number</label>
+                        </div>
+                    </div>
+                    <div class="item-1">
+                        <div class="input-group">
+                            <input type="number" id="age" name="age" required class="input">
+                            <label for="age" class="input-label" min="18" max="99">Age</label>
+                        </div>
+                    </div>
+                    <div class="item-1">
+                        <div class="date-piker">
+                            <div class="date-label">
+                                Date
+                            </div>
+                            <div class="input-group">
+                                <input type="date" id="date" required class="input">
+                                <label for="date" class="input-label"></label>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
-                
+                <div class="car-info">
+                    <div class="item-2">
+                        <div class="input-group">
+                            <input type="text" id="make" name="make" required class="input">
+                            <label for="make" class="input-label">Make</label>
+                        </div>
+                    </div>
+                    <div class="item-2">
+                        <div class="input-group">
+                            <input type="text" id="model" name="model" required class="input">
+                            <label for="model" class="input-label">Model</label>
+                        </div>
+                    </div>
+                    <div class="item-2">
+                        <div class="input-group">
+                            <input type="number" id="year" name="year" required class="input">
+                            <label for="year" class="input-label">Year</label>
+                        </div>
+                    </div>
+                    <div class="item-2">
+                        <div class="input-group">
+                            <input type="text" id="pNumber" name="pNumber" required class="input">
+                            <label for="PNumber" class="input-label">Plate-Number</label>
+                        </div>          
+                    </div>
+                </div>
             </div>
-            <div class="car-info">
-                <div class="item-2">
-                    <div class="input-group">
-                        <input type="text" id="make" required class="input">
-                        <label for="make" class="input-label">Make</label>
-                    </div>
-                </div>
-                <div class="item-2">
-                    <div class="input-group">
-                        <input type="text" id="model" required class="input">
-                        <label for="model" class="input-label">Model</label>
-                    </div>
-                </div>
-                <div class="item-2">
-                    <div class="input-group">
-                        <input type="number" id="year" required class="input">
-                        <label for="year" class="input-label">Year</label>
-                    </div>
-                </div>
-                <div class="item-2">
-                    <div class="input-group">
-                        <input type="text" id="pNumber" required class="input">
-                        <label for="PNumber" class="input-label">Plate-Number</label>
-                    </div>          
-                </div>
+            <div class="f-submit">
+                <button type="submit" id="submit" class="submit"></button>
             </div>
-        </div>
-        <div class="f-submit">
-            <button class="submit"></button>
-       </div>
+        </form>
     </main>
     <!-- Footer-->
     <%- include('layouts/footer'); -%>
