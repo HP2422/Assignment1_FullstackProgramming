@@ -1,11 +1,29 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const bcrypt = require("bcrypt");
 
-var us_pd = new Schema({
-    username: String,
-    password: String
+const allData = new Schema({
+    fName: String,
+    lName: String,
+    age: Number,
+    sin: { type: String },
+    lNumber: { type: String, required: true, unique: true },
+    dob: { type: Date, default: new Date() },
+    carDetails: {
+        make: String,
+        model: String,
+        year: Number,
+        plateNo: String
+    }
 });
 
-const user_pwd = mongoose.model('user_pwd', us_pd);
+allData.pre("save", function (next) {
+    const user = this;
+    bcrypt.hash(user.sin, 10, (error, hash) => {
+        user.sin = hash;
+        next();
+    })
+})
 
-module.exports = user_pwd;
+const data = mongoose.model("data", allData);
+module.exports = data;

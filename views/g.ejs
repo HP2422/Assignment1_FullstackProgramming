@@ -25,20 +25,123 @@
     <!-- Main Content-->
     <hr/>
     <main>
-        <div class="fillup-form">
-            <div class="personal-info">
-                <div class="item-1">
-                    <div class="input-group">
-                        <input type="text" id="lNumber" name="lNumber" required class="input">
-                        <label for="lNumber" class="input-label">License Number</label>
+        <form method="POST" action="/getData">
+            <div class="fillup-form">
+                <div class="personal-info">
+                    <div class="item-1">
+                        <div class="input-group">
+                            <input type="text" id="lNumber" name="lNumber" required class="input">
+                            <label for="lNumber" class="input-label">License Number</label>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="f-submit">
-            <button class="submit"></button>
-       </div>
+            <div class="f-submit">
+                <button class="submit" type="submit"></button>
+            </div>
+        </form>
+
+        <!-- <h1><% if (data != null ) { %> True
+                        False - <%=data.isempty%>
+                        <% } %> -->
+                <% if(data != null ) {%>
+                </h1>
+                    <% if(data.message == null ) {%>
+                        <div class="offset-3 col-6">
+                            <form method="POST" action="/g2/updateDetails">
+                                <h4 class="mb-5 text-center fs-2 text-black">Personal Information</h4>
+                                <div class="row g-3">
+                                    <input id="id" name="id" type="hidden" value=<%= data._id %>>
+                                    <div class="col-sm-6">
+                                        <label for="firstName" class="form-label text-black">First name</label>
+                                        <input type="text" class="form-control" id="fName" name="firstName" disabled value=<%=data[0].fName%>>
+                                    </div>
+                    
+                                    <div class="col-sm-6">
+                                        <label for="lastName" class="form-label text-black">Last name</label>
+                                        <input type="text" class="form-control" id="lName" name="lastName" disabled value=<%=data[0].lName%>>
+                                    </div>
+                                </div>
+                                <div class="row g-3">
+                                    <div class="col-sm-6">
+                                        <label for="licenceNumber" class="form-label text-black">Licence Number</label>
+                                        <input type="text" class="form-control" id="lNumber" name="licenceNumber" disabled value=<%=data[0].lNumber%>>
+                                        
+                                    </div> 
+                                    
+                                </div>
+                                <div class="row g-3">
+                                    <div class="col-sm-6">
+                                        <label for="age" class="form-label text-black">Age</label>
+                                        <input type="text" class="form-control" id="age" name="age" disabled value=<%=data[0].age%>>
+                                        <div class="invalid-feedback">
+                                            Valid first name is required.
+                                        </div>
+                                    </div>
+                    
+                                    <div class="col-sm-6">
+                                        <label for="dateOfBirth" class="form-label text-black">Date Of Birth</label>
+                                        <input type="text" class="form-control" id="dob" name="dateOfBirth" disabled value=<%=data.dob%>>
+                                    </div>
+                                    
+                                </div>
+                                <br><br>
+                                <h4 class="mb-5 text-center fs-2 text-black">Car Information</h4>
+                                <div class="row g-3">
+                                    <div class="col-sm-4">
+                                        <label for="make" class="form-label text-black">Make</label>
+                                        <input type="text" class="form-control" id="make" name="make" value="<%= data[0].carDetails.make %>">
+                                        
+                                    </div>
+                    
+                                    <div class="col-sm-4">
+                                        <label for="model" class="form-label text-black">Model</label>
+                                        <input type="text" class="form-control" id="model" name="model" value="<%= data[0].carDetails.model %>">
+                                        
+                                    </div>
+            
+                                    <div class="col-sm-4">
+                                        <label for="year" class="form-label text-black">Year</label>
+                                        <input type="text" class="form-control" id="year" name="year" value="<%= data[0].carDetails.year %>">
+                                        
+                                    </div>
+                                </div>
+                                <div class="row g-3">
+                                    <div class="col-sm-8">
+                                        <label for="plateNumber" class="form-label text-black">Plate number</label>
+                                        <input type="text" class="form-control" id="plateNo" name="plateNumber" value="<%= data[0].carDetails.plateNo %>">
+                                        
+                                    </div>
+                                </div>
+                                <div class="f-submit">
+                                    <button class="submit" type="submit" style="margin-top:50px"></button>
+                                </div>
+                            </form>
+                        </div> 
+                    <%} else {%>
+                        
+                        <div class="offset-3 col-6">
+                            <form method="GET" action="/g2">
+                                
+                                <div class="row g-3 text-center p-5">
+                                    <div class="col-sm-12">
+                                        <h5 class="mb-5 text-center fs-4 text-black">No licenceNumber found</h5>
+                                        <button class="btn btn-primary text-uppercase" id="submitButton" name="submitButton" type="submit">G2 Page</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div> 
+
+                    <%}}%>
+
+
+
+
+
+            </div>
     </main>
+
+    
     <!-- Footer-->
     <%- include('layouts/footer'); -%>
     <!-- Replace with ejs -->
