@@ -45,7 +45,8 @@ body {
 }
 
 .login,
-.submit {
+.submit,
+.g2submit {
     background-color: transparent;
     position: relative;
     height: 50px;
@@ -62,12 +63,14 @@ body {
 }
 
 .login:hover,
-.submit:hover {
+.submit:hover,
+.g2submit:hover {
     background-color: rgb(46, 46, 46);
 }
 
 .login::before,
-.submit::before {
+.submit::before,
+.g2submit::before {
     content: '';
     position: absolute;
     background-color: #195190FF;
@@ -81,7 +84,8 @@ body {
 }
 
 .login:hover::before,
-.submit:hover::before {
+.submit:hover::before,
+.g2submit:hover::before {
     height: 350px;
     width: 350px;
 }
@@ -94,6 +98,12 @@ body {
 
 .submit::after {
     content: 'Submit';
+    position: relative;
+    z-index: 1;
+}
+
+.g2submit::after {
+    content: 'G2 PAGE';
     position: relative;
     z-index: 1;
 }

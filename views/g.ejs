@@ -51,7 +51,7 @@
                             <form method="POST" action="/g2/updateDetails">
                                 <h4 class="mb-5 text-center fs-2 text-black">Personal Information</h4>
                                 <div class="row g-3">
-                                    <input id="id" name="id" type="hidden" value=<%= data._id %>>
+                                    <input id="id" name="id" type="hidden" value=<%= data[0]._id %>>
                                     <div class="col-sm-6">
                                         <label for="firstName" class="form-label text-black">First name</label>
                                         <input type="text" class="form-control" id="fName" name="firstName" disabled value=<%=data[0].fName%>>
@@ -108,8 +108,8 @@
                                 </div>
                                 <div class="row g-3">
                                     <div class="col-sm-8">
-                                        <label for="plateNumber" class="form-label text-black">Plate number</label>
-                                        <input type="text" class="form-control" id="plateNo" name="plateNumber" value="<%= data[0].carDetails.plateNo %>">
+                                        <label for="plateNo" class="form-label text-black">Plate number</label>
+                                        <input type="text" class="form-control" id="plateNo" name="plateNo" value="<%= data[0].carDetails.plateNo %>">
                                         
                                     </div>
                                 </div>
@@ -126,7 +126,10 @@
                                 <div class="row g-3 text-center p-5">
                                     <div class="col-sm-12">
                                         <h5 class="mb-5 text-center fs-4 text-black">No licenceNumber found</h5>
-                                        <button class="btn btn-primary text-uppercase" id="submitButton" name="submitButton" type="submit">G2 Page</button>
+                                        <!-- <button class="btn btn-primary text-uppercase" id="submitButton" name="submitButton" type="submit">G2 Page</button> -->
+                                        <div class="g2-submit">
+                                            <button class="g2submit" type="submit" style="margin-top:50px"></button>
+                                        </div>
                                     </div>
                                 </div>
                             </form>

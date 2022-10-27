@@ -104,54 +104,39 @@ app.post("/getData", async (req, res) => {
             lNumber: req.body.lNumber,
         }).lean();
         if (data[0] != null) {
-            console.log("IF");
             data.dob = data[0].dob.getMonth() + "-" + data[0].dob.getDate() + "-" + data[0].dob.getFullYear();
         } else {
-            console.log("ELSE");
             data = { message: "No user found" }
         }
+        console.log(data);
     } catch (error) {
         console.log(error);
     }
     res.render("g", { data });
 });
 
-
-// HELLLOOOO Friends
-
-
+// Update the Data.
 app.post("/g2/updateDetails", async (req, res) => {
-    // console.log("updateDetails Called -> " + req.body.data.lNumber);
+    console.log("updateDetails Called -> " + req.body.id);
+    console.log("body -> " + req.body);
 
-    if (req.body.licenceno) {
-        const data = await Data.find({
-            lNumber: req.query.lNumber,
-        });
-        console.log({ data });
-        res.render("g", { data });
-    } else {
-        res.redirect("/");
-    }
-
-    // console.log("body -> " + req.body.data);
-
-    // const obj = {
-    //     carInformation: {
-    //         make: req.body.make,
-    //         model: req.body.model,
-    //         year: req.body.year,
-    //         plateNo: req.body.plateNo,
-    //     },
-    // };
-    // console.log("make -> " + obj)
+    const obj = {
+        carDetails: {
+            make: req.body.make,
+            model: req.body.model,
+            year: req.body.year,
+            plateNo: req.body.plateNo,
+        },
+    };
+    console.log("make -> " + obj);
 
 
-    // const output = await Data.findByIdAndUpdate(req.body.id, obj, function (error, object) {
-    //     console.log("error -> " + error + " , Obj -> " + obj);
-    // }).clone();
+    const output = await Data.findByIdAndUpdate(req.body.id, obj, function (error, object) {
+        console.log("error -> " + error + " , Obj -> " + obj);
+    }).clone();
 
-    // console.log('Update success' + output)
-    // res.redirect('/g');
+    console.log('Update success 1' + output)
+    res.redirect('/g');
 })
 
 
@@ -161,3 +146,6 @@ app.use(express.static("public"));
 app.listen(port, () => {
     console.log("Server is listening on " + port);
 })
+
+// Assignment 2 Insuructions Completed.
+// ADD, FETCH and UPDATE DATA is running smoothly.
