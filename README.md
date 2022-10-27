@@ -1,7 +1,9 @@
 # Assignment1_FullstackProgramming
 
 
-I Added my own css with the name of external.css. I designed U.I as well as routing in this project according to the assignemts instructions.
+Assignment 1 and Assignment 2
+- Design
+- Add, Fetch and Update data into the monogodb atlas.
 
 Thank You.
 
