@@ -4,21 +4,26 @@ body {
     background-color: #242329;
 }
 
+main {
+    padding: 2rem;
+}
+
 .input-group {
     position: relative;
-    border-radius: 4px;
+    border-radius: 5rem;
+    padding: 2px;
     justify-items: center;
 }
 
 .input {
     padding: 10px;
     border: none;
+    margin: auto;
     border-radius: 4px;
     font: inherit;
     color: #fff;
     background-color: transparent;
     outline: 2px solid #fff;
-
 }
 
 .input-label {
@@ -46,7 +51,8 @@ body {
 
 .login,
 .submit,
-.g2submit {
+.g2submit,
+.signUp {
     background-color: transparent;
     position: relative;
     height: 50px;
@@ -64,13 +70,15 @@ body {
 
 .login:hover,
 .submit:hover,
-.g2submit:hover {
+.g2submit:hover,
+.signUp:hover {
     background-color: rgb(46, 46, 46);
 }
 
 .login::before,
 .submit::before,
-.g2submit::before {
+.g2submit::before,
+.signUp::before {
     content: '';
     position: absolute;
     background-color: #195190FF;
@@ -85,7 +93,8 @@ body {
 
 .login:hover::before,
 .submit:hover::before,
-.g2submit:hover::before {
+.g2submit:hover::before,
+.signUp:hover::before {
     height: 350px;
     width: 350px;
 }
@@ -108,13 +117,27 @@ body {
     z-index: 1;
 }
 
-.login-flex {
+.signUp::after {
+    content: 'Sign Up';
+    position: relative;
+    z-index: 1;
+}
+
+.login-flex,
+.signup-flex {
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 10px;
     border-color: #fff;
     margin: 0ch;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* padding: 2rem; */
 }
 
 .f-uname,
@@ -125,6 +148,22 @@ body {
     width: 200px;
     height: 100px;
     margin: 10px;
+}
+
+.user-type {
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
+}
+
+.user-type>.forLabel>.label {
+    color: white;
+}
+
+.user-type>.selection {
+    background-color: black;
+    color: #fff;
+    overflow: auto;
 }
 
 .date-piker {
@@ -157,4 +196,26 @@ body {
         justify-content: space-evenly;
         align-items: center;
     }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+}
+
+.login-flex b,
+.signup-flex b {
+    color: #fff;
+}
+
+.login-flex,
+.signup-flex {
+    padding: 8rem;
+    background-color: rgb(39, 34, 34);
+    border: 2px solid;
+    border-radius: 50px;
+    border-color: #fff;
 }

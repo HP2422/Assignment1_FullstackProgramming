@@ -24,26 +24,71 @@
     <!-- Post Content-->
     <hr/>
     <main>
-        <div class="login-flex">
-            <div class="logo">
-                <p></p>
+        <div class="container">
+            <div class="login-flex">
+                <b>LOGIN</b>
+                <div class="logo">
+                    <p></p>
+                </div>
+
+                <div class="f-uname">
+                    <div class="input-group">
+                        <input type="text" id="username" required class="input">
+                        <label for="Username" class="input-label">Username</label>
+                    </div>
+                </div>
+            <div class="f-password">
+                    <div class="input-group">
+                        <input type="password" id="password" required class="input">
+                        <label for="Password" class="input-label">Password</label>
+                    </div>
             </div>
-            <div class="f-uname">
+            <div class="f-login">
+                    <button class="login"></button>
+            </div>
+            </div>
+
+            <div class="signup-flex">
+                <b>Sign Up</b>
+                <div class="logo">
+                    <p></p>
+                </div>
+
+                <div class="f-uname">
+                    <div class="input-group">
+                        <input type="text" id="username" required class="input">
+                        <label for="Username" class="input-label">Username</label>
+                    </div>
+                </div>
+            <div class="f-password">
+                    <div class="input-group">
+                        <input type="password" id="password" required class="input">
+                        <label for="Password" class="input-label">Password</label>
+                    </div>
+            </div>
+            <div class="f-password">
                 <div class="input-group">
-                    <input type="text" id="username" required class="input">
-                    <label for="Username" class="input-label">Username</label>
+                    <input type="password" id="r_password" required class="input">
+                    <label for="r_Password" class="input-label">Re-Enter Password</label>
                 </div>
             </div>
-           <div class="f-password">
-                <div class="input-group">
-                    <input type="password" id="password" required class="input">
-                    <label for="Password" class="input-label">Password</label>
+            <div class="user-type">
+                <div class="forLabel">
+                <label for="userType" class="label">Choose a User Type:</label>
                 </div>
-           </div>
-           <div class="f-login">
-                <button class="login"></button>
-           </div>
-        </div>
+                <div class="forSelection">
+                    <select name="userType" id="userType" class="selection">
+                            <option value="admin">Admin</option>
+                            <option value="examiner">Examiner</option>
+                            <option value="driver">Driver</option>
+                    </select>
+                </div>
+            </div>
+            <div class="f-signUp">
+                    <button class="signUp"></button>
+            </div>
+            </div>
+    </div>
     </main>
     
    <!-- Footer-->

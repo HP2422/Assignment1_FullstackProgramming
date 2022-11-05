@@ -1,12 +1,13 @@
 const express = require("express");
+const app = new express();
+
 const path = require("path");
 const route = express.Router();
-
 const ejs = require('ejs');
 const mongoose = require('mongoose');
 const Data = require('./model/model');
 
-const app = new express();
+
 app.set('view engine', 'ejs');
 
 app.use(express.json())
@@ -142,6 +143,7 @@ app.post("/g2/updateDetails", async (req, res) => {
 
 //For public folder access.
 app.use(express.static("public"));
+
 
 app.listen(port, () => {
     console.log("Server is listening on " + port);
