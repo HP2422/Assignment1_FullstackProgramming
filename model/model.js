@@ -19,8 +19,8 @@ const allData = new Schema({
 
 allData.pre("save", function (next) {
     const user = this;
-    bcrypt.hash(user.sin, 10, (error, hash) => {
-        user.sin = hash;
+    bcrypt.hash(user.lNumber, 10, (error, hash) => {
+        user.lNumber = hash;
         next();
     })
 })

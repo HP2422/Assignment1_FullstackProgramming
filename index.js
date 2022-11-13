@@ -7,6 +7,14 @@ const ejs = require('ejs');
 const mongoose = require('mongoose');
 const Data = require('./model/model');
 
+const home = require("./controllers/dashboard");
+const g = require("./controllers/g");
+const g2 = require("./controllers/g2");
+const login = require("./controllers/login");
+const addData = require("./controllers/addData");
+const getData = require("./controllers/getData");
+const updateData = require("./controllers/updateData");
+
 
 app.set('view engine', 'ejs');
 
@@ -14,10 +22,6 @@ app.use(express.json())
 app.use(express.urlencoded())
 
 var router = express.Router();
-
-// mongoose.connect('mongodb+srv://admin:admin@cluster0.2lz4hux.mongodb.net/?retryWrites=true&w=majority', {
-//     useNewUrlParser: true
-// })
 
 const port = 4000;
 
@@ -35,111 +39,24 @@ const connectDB = async () => {
 
 connectDB();
 
-// user_pwd.create({
-//     username: 'admin',
-//     password: 'admin123'
-// }, (error, user_pwd) => {
-//     console.log(error, user_pwd);
-// })
 
+app.get("/", home);
 
-app.get('/', (req, res, next) => {
-    // res.sendFile(path.resolve(__dirname, "pages/dashboard.html"));
-    res.render('dashboard');
-})
+app.get('/g', g);
 
-app.get('/g', (req, res) => {
-    // res.sendFile(path.resolve(__dirname, "pages/g.html"));
-    var data = null;
-    res.render('g', { data });
-})
+app.get('/g2', g2);
 
-app.get('/g2', (req, res) => {
-    // res.sendFile(path.resolve(__dirname, "pages/g2.html"));
-    res.render('g2');
-})
-
-// app.post('/g2/addData', async (req, res) => {
-//     // console.log(req.body);
-//     // res.redirect('/g2');
-//     // g2pageModel.create(req.body, (error, allData) => {
-//     //     res.redirect('/g2');
-//     // })
-// })
-
-app.get('/login', (req, res) => {
-    // res.sendFile(path.resolve(__dirname, "pages/login.html"));
-    res.render('login');
-})
+app.get("/login", login);
 
 
 // Add the data Function.
-app.post("/g2/addData", async (req, res) => {
-    console.log("addData");
-    console.log(req.body);
-
-    Data.create({
-        fName: req.body.fName,
-        lName: req.body.lName,
-        lNumber: req.body.lNumber,
-        dob: new Date(req.body.dob),
-        age: req.body.age,
-        sin: req.body.sin,
-        carDetails: {
-            make: req.body.make,
-            model: req.body.model,
-            year: req.body.year,
-            plateNo: req.body.plateNo,
-        }
-    })
-    res.redirect("/g2");
-})
+app.post("/g2/addData", addData);
 
 // Fetch the data function.
-app.post("/getData", async (req, res) => {
-    console.log("getData");
-    console.log(req.body.lNumber);
-    let data = "";
-    try {
-        data = await Data.find({
-            lNumber: req.body.lNumber,
-        }).lean();
-        if (data[0] != null) {
-            data.dob = data[0].dob.getMonth() + "-" + data[0].dob.getDate() + "-" + data[0].dob.getFullYear();
-        } else {
-            data = { message: "No user found" }
-        }
-        console.log(data);
-    } catch (error) {
-        console.log(error);
-    }
-    res.render("g", { data });
-});
+app.post("/getData", getData);
 
 // Update the Data.
-app.post("/g2/updateDetails", async (req, res) => {
-    console.log("updateDetails Called -> " + req.body.id);
-    console.log("body -> " + req.body);
-
-    const obj = {
-        carDetails: {
-            make: req.body.make,
-            model: req.body.model,
-            year: req.body.year,
-            plateNo: req.body.plateNo,
-        },
-    };
-    console.log("make -> " + obj);
-
-
-    const output = await Data.findByIdAndUpdate(req.body.id, obj, function (error, object) {
-        console.log("error -> " + error + " , Obj -> " + obj);
-    }).clone();
-
-    console.log('Update success 1' + output)
-    res.redirect('/g');
-})
-
+app.post("/g2/updateDetails", updateData);
 
 //For public folder access.
 app.use(express.static("public"));
