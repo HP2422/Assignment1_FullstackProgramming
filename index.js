@@ -19,6 +19,7 @@ const updateData = require("./controllers/updateData");
 const signup = require("./controllers/signup");
 const storeUser = require("./controllers/storeUser");
 
+const userLogin = require("./controllers/userLogin");
 
 app.set('view engine', 'ejs');
 
@@ -53,6 +54,7 @@ app.get('/g', g);
 app.get('/g2', g2);
 
 app.get("/login", login);
+app.post("/users/login", userLogin);
 app.get("/signup", signup);
 app.post("/storeUser", storeUser);
 
