@@ -1,5 +1,6 @@
 const user = require('../model/user');
 module.exports = async (req, res) => {
+    console.log("StoreUser is Called.");
     console.log(req.body);
     try {
         if (req.body.password != req.body.r_password) {

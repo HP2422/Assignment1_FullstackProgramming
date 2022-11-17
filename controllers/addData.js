@@ -1,9 +1,9 @@
 const Data = require('../model/model');
 module.exports = async (req, res) => {
-    console.log("addData");
+    console.log("Add Data is called to add data in database.");
     console.log(req.body);
 
-    Data.create({
+    const object = {
         fName: req.body.fName,
         lName: req.body.lName,
         lNumber: req.body.lNumber,
@@ -16,6 +16,16 @@ module.exports = async (req, res) => {
             year: req.body.year,
             plateNo: req.body.plateNo,
         }
-    })
+    };
+
+
+    const output = await Data.findByIdAndUpdate(req.session.userId, object, function (error, object) {
+        console.log("error -> " + error + " , Obj -> " + object);
+        if (error == null && object != null) {
+            global.isInfoProvided = true;
+            console.log("isInfoProvided - " + global.isInfoProvided);
+        }
+    }).clone();
+
     res.redirect("/g2");
 }

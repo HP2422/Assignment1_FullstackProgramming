@@ -4,9 +4,11 @@ const app = new express();
 const path = require("path");
 const route = express.Router();
 const ejs = require('ejs');
+const expressSession = require("express-session");
 const mongoose = require('mongoose');
 const Data = require('./model/model');
 const user = require('./model/user');
+
 
 const home = require("./controllers/dashboard");
 const g = require("./controllers/g");
@@ -21,16 +23,24 @@ const storeUser = require("./controllers/storeUser");
 
 const userLogin = require("./controllers/userLogin");
 
+const authMiddleware = require("./middleware/authMiddleware");
+const redirectIfAuthenticated = require("./middleware/redirectIfAuthenticated");
+const informationCheck = require("./middleware/informationCheck");
+
+const logout = require("./controllers/logout");
+
 app.set('view engine', 'ejs');
 
 global.eMsg = null;
-
+global.loggedIn = null;
+global.isInfoProvided = false;
 app.use(express.json())
 app.use(express.urlencoded())
-
+app.use(expressSession({ secret: "patel495", resave: false, saveUninitialized: true }));
 var router = express.Router();
 
 const port = 4000;
+
 
 const connectDB = async () => {
     try {
@@ -47,27 +57,30 @@ const connectDB = async () => {
 connectDB();
 
 
+
 app.get("/", home);
 
-app.get('/g', g);
+app.get('/g', authMiddleware, informationCheck, g);
 
-app.get('/g2', g2);
+app.get('/g2', authMiddleware, g2);
 
-app.get("/login", login);
-app.post("/users/login", userLogin);
-app.get("/signup", signup);
-app.post("/storeUser", storeUser);
+app.get("/login", redirectIfAuthenticated, login);
+app.post("/users/login", redirectIfAuthenticated, userLogin);
+app.get("/signup", redirectIfAuthenticated, signup);
+app.post("/storeUser", redirectIfAuthenticated, storeUser);
+
+app.get("/logout", logout);
 
 
 
 // Add the data Function.
-app.post("/g2/addData", addData);
+app.post("/g2/addData", authMiddleware, addData);
 
 // Fetch the data function.
 app.post("/getData", getData);
 
 // Update the Data.
-app.post("/updateData", updateData);
+app.post("/updateData", authMiddleware, updateData);
 
 //For public folder access.
 app.use(express.static("public"));
@@ -77,5 +90,13 @@ app.listen(port, () => {
     console.log("Server is listening on " + port);
 })
 
-// Assignment 2 Insuructions Completed.
-// ADD, FETCH and UPDATE DATA is running smoothly.
+app.use("*", (req, res, next) => {
+    loggedIn = req.session.userId;
+    console.log("HEY");
+    console.log(loggedIn);
+    console.log("HEY");
+    next();
+});
+
+app.use((req, res) => res.render('notFound'));
+// COMPLETED
