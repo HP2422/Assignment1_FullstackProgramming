@@ -3,12 +3,11 @@ const app = new express();
 
 const path = require("path");
 const route = express.Router();
-const ejs = require('ejs');
+const ejs = require("ejs");
 const expressSession = require("express-session");
-const mongoose = require('mongoose');
-const Data = require('./model/model');
-const user = require('./model/user');
-
+const mongoose = require("mongoose");
+const Data = require("./model/model");
+const user = require("./model/user");
 
 const home = require("./controllers/dashboard");
 const g = require("./controllers/g");
@@ -29,49 +28,47 @@ const informationCheck = require("./middleware/informationCheck");
 
 const logout = require("./controllers/logout");
 
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 
 global.eMsg = null;
 global.loggedIn = null;
 global.isInfoProvided = false;
-app.use(express.json())
-app.use(express.urlencoded())
-app.use(expressSession({ secret: "patel495", resave: false, saveUninitialized: true }));
+app.use(express.json());
+app.use(express.urlencoded());
+app.use(expressSession({ secret: "harsh patel" }));
 var router = express.Router();
 
 const port = 4000;
 
-
 const connectDB = async () => {
-    try {
-        const con = await mongoose.connect("mongodb+srv://admin:admin@cluster0.2lz4hux.mongodb.net/?retryWrites=true&w=majority", {
-            useNewUrlParser: true
-        })
-        console.log(`MongoDb Database is Connected ${con.connection.host}`);
-    } catch (err) {
-        console.log(err);
-        process.exit(1);
-    }
-}
+  try {
+    const con = await mongoose.connect(
+      "mongodb+srv://admin:admin@cluster0.2lz4hux.mongodb.net/?retryWrites=true&w=majority",
+      {
+        useNewUrlParser: true,
+      }
+    );
+    console.log(`MongoDb Database is Connected ${con.connection.host}`);
+  } catch (err) {
+    console.log(err);
+    process.exit(1);
+  }
+};
 
 connectDB();
 
-
-
 app.get("/", home);
 
-app.get('/g', authMiddleware, informationCheck, g);
+app.get("/g", authMiddleware, g);
 
-app.get('/g2', authMiddleware, g2);
+app.get("/g2", authMiddleware, g2);
 
-app.get("/login", redirectIfAuthenticated, login);
+app.get("/login", login);
 app.post("/users/login", redirectIfAuthenticated, userLogin);
 app.get("/signup", redirectIfAuthenticated, signup);
 app.post("/storeUser", redirectIfAuthenticated, storeUser);
 
 app.get("/logout", logout);
-
-
 
 // Add the data Function.
 app.post("/g2/addData", authMiddleware, addData);
@@ -85,18 +82,18 @@ app.post("/updateData", authMiddleware, updateData);
 //For public folder access.
 app.use(express.static("public"));
 
-
 app.listen(port, () => {
-    console.log("Server is listening on " + port);
-})
-
-app.use("*", (req, res, next) => {
-    loggedIn = req.session.userId;
-    console.log("HEY");
-    console.log(loggedIn);
-    console.log("HEY");
-    next();
+  console.log("Server is listening on " + port);
 });
 
-app.use((req, res) => res.render('notFound'));
+app.use("*", (req, res, next) => {
+  if (req.session) {
+    loggedIn = req.session.userId;
+  } else {
+    loggedIn = req.session?.userId;
+  }
+  next();
+});
+
+app.use((req, res) => res.render("notFound"));
 // COMPLETED

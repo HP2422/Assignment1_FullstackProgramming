@@ -25,21 +25,7 @@
     <!-- Main Content-->
     <hr/>
     <main>
-        <form method="POST" action="/getData">
-            <div class="fillup-form">
-                <div class="personal-info">
-                    <div class="item-1">
-                        <div class="input-group">
-                            <input type="text" id="lNumber" name="lNumber" required class="input">
-                            <label for="lNumber" class="input-label">License Number</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="f-submit">
-                <button class="submit" type="submit"></button>
-            </div>
-        </form>
+        
 
         <!-- <h1><% if (data != null ) { %> True
                         False - <%=data.isempty%>
@@ -51,21 +37,21 @@
                             <form method="POST" action="/updateData">
                                 <h4 class="mb-5 text-center fs-2 text-black">Personal Information</h4>
                                 <div class="row g-3">
-                                    <input id="id" name="id" type="hidden" value=<%= data[0]._id %>>
+                                    <input id="id" name="id" type="hidden" value=<%= data._id %>>
                                     <div class="col-sm-6">
                                         <label for="firstName" class="form-label text-black">First name</label>
-                                        <input type="text" class="form-control" id="fName" name="firstName" disabled value=<%=data[0].fName%>>
+                                        <input type="text" class="form-control" id="fName" name="firstName" disabled value=<%=data.fName%>>
                                     </div>
                     
                                     <div class="col-sm-6">
                                         <label for="lastName" class="form-label text-black">Last name</label>
-                                        <input type="text" class="form-control" id="lName" name="lastName" disabled value=<%=data[0].lName%>>
+                                        <input type="text" class="form-control" id="lName" name="lastName" disabled value=<%=data.lName%>>
                                     </div>
                                 </div>
                                 <div class="row g-3">
                                     <div class="col-sm-6">
                                         <label for="licenceNumber" class="form-label text-black">Licence Number</label>
-                                        <input type="text" class="form-control" id="lNumber" name="licenceNumber" disabled value=<%=data[0].lNumber%>>
+                                        <input type="text" class="form-control" id="lNumber" name="licenceNumber" disabled value=<%=data.lNumber%>>
                                         
                                     </div> 
                                     
@@ -73,7 +59,7 @@
                                 <div class="row g-3">
                                     <div class="col-sm-6">
                                         <label for="age" class="form-label text-black">Age</label>
-                                        <input type="text" class="form-control" id="age" name="age" disabled value=<%=data[0].age%>>
+                                        <input type="text" class="form-control" id="age" name="age" disabled value=<%=data.age%>>
                                         <div class="invalid-feedback">
                                             Valid first name is required.
                                         </div>
@@ -90,26 +76,26 @@
                                 <div class="row g-3">
                                     <div class="col-sm-4">
                                         <label for="make" class="form-label text-black">Make</label>
-                                        <input type="text" class="form-control" id="make" name="make" value="<%= data[0].carDetails.make %>">
+                                        <input type="text" class="form-control" id="make" name="make" value="<%= data.carDetails.make %>">
                                         
                                     </div>
                     
                                     <div class="col-sm-4">
                                         <label for="model" class="form-label text-black">Model</label>
-                                        <input type="text" class="form-control" id="model" name="model" value="<%= data[0].carDetails.model %>">
+                                        <input type="text" class="form-control" id="model" name="model" value="<%= data.carDetails.model %>">
                                         
                                     </div>
             
                                     <div class="col-sm-4">
                                         <label for="year" class="form-label text-black">Year</label>
-                                        <input type="text" class="form-control" id="year" name="year" value="<%= data[0].carDetails.year %>">
+                                        <input type="text" class="form-control" id="year" name="year" value="<%= data.carDetails.year %>">
                                         
                                     </div>
                                 </div>
                                 <div class="row g-3">
                                     <div class="col-sm-8">
                                         <label for="plateNo" class="form-label text-black">Plate number</label>
-                                        <input type="text" class="form-control" id="plateNo" name="plateNo" value="<%= data[0].carDetails.plateNo %>">
+                                        <input type="text" class="form-control" id="plateNo" name="plateNo" value="<%= data.carDetails.plateNo %>">
                                         
                                     </div>
                                 </div>
