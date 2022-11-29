@@ -50,7 +50,7 @@ const port = 4000;
 
 const connectDB = async () => {
   try {
-    const con = await mongoose.connect(mongodb+srv://admin:admin@cluster0.2lz4hux.mongodb.net/?retryWrites=true&w=majority, { useNewUrlParser: true });
+    const con = await mongoose.connect("mongodb+srv://admin:admin@cluster0.2lz4hux.mongodb.net/?retryWrites=true&w=majority", { useNewUrlParser: true });
     console.log(`MongoDb Database is Connected ${con.connection.host}`);
   } catch (err) {
     console.log(err);
