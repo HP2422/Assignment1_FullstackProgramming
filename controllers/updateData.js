@@ -1,23 +1,30 @@
 const Data = require("../model/model");
+const availableAppointmentsSchema = require("../model/appointments");
+
 module.exports = async (req, res) => {
+  console.log("Update Data is called." + req.session.userId);
   console.log(req.body._id);
   console.log({ req });
 
-  const obj = {
-    ...req.body,
-    carDetails: {
-      make: req.body.make,
-      model: req.body.model,
-      year: req.body.year,
-      plateNo: req.body.plateNo,
-    },
-  };
-  const output = await Data.findByIdAndUpdate(
-    req.session.userId,
-    obj,
-    function (error, object) {
-      console.log("error -> " + error + " , Obj -> " + { obj });
+  const appointment = await availableAppointmentsSchema.findOneAndUpdate(
+    { time: req.body.time, date: req.body.date },
+    {
+      isTimeSlotAvailable: false,
     }
-  ).clone();
+  );
+
+  await Data.findOneAndUpdate(
+    { _id: req.session.userId },
+    {
+      ...req.body,
+      carDetails: {
+        make: req.body.make,
+        model: req.body.model,
+        year: req.body.year,
+        plateNo: req.body.plateNo,
+      },
+    }
+  );
+
   res.redirect("/g");
 };

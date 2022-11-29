@@ -11,7 +11,11 @@ const allData = new Schema({
   age: { type: Number, default: 20 },
   sin: { type: String, default: "1234987676" },
   lNumber: { type: String, unique: true, default: "DFGHJKL" },
-  dob: { type: Date, default: new Date() },
+  date: { type: String, default: null },
+  time: { type: String, default: null },
+  firstTime: { type: Boolean, default: true },
+  appointmentId: { type: String, default: null },
+  // dob: { type: Date, default: new Date() },
   carDetails: {
     make: { type: String, default: "1980" },
     model: { type: String, default: "BMW" },

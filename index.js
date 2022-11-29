@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const app = new express();
 
@@ -25,6 +27,12 @@ const userLogin = require("./controllers/userLogin");
 const authMiddleware = require("./middleware/authMiddleware");
 const redirectIfAuthenticated = require("./middleware/redirectIfAuthenticated");
 const informationCheck = require("./middleware/informationCheck");
+const authMiddleware_admin = require("./middleware/authMiddleware_admin");
+
+const appointment = require("./controllers/appointment");
+const getAppointmentAdminController = require("./controllers/getAppointmentAdmin");
+const createAppointmentsController = require("./controllers/createAppointments");
+const getAppointmentDriverController = require("./controllers/getAppointmentDriver");
 
 const logout = require("./controllers/logout");
 
@@ -35,19 +43,14 @@ global.loggedIn = null;
 global.isInfoProvided = false;
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(expressSession({ secret: "harsh patel" }));
+app.use(expressSession({ secret: "patel495" }));
 var router = express.Router();
 
 const port = 4000;
 
 const connectDB = async () => {
   try {
-    const con = await mongoose.connect(
-      "mongodb+srv://admin:admin@cluster0.2lz4hux.mongodb.net/?retryWrites=true&w=majority",
-      {
-        useNewUrlParser: true,
-      }
-    );
+    const con = await mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true });
     console.log(`MongoDb Database is Connected ${con.connection.host}`);
   } catch (err) {
     console.log(err);
@@ -78,6 +81,15 @@ app.post("/getData", getData);
 
 // Update the Data.
 app.post("/updateData", authMiddleware, updateData);
+
+// To open appointment page for admin
+app.get("/appointment", authMiddleware_admin, appointment);
+
+app.post("/createAppointments", authMiddleware_admin, createAppointmentsController);
+
+app.get("/getAppointmentAdmin", authMiddleware_admin, getAppointmentAdminController);
+
+app.get("/getAppointmentDriver", authMiddleware, getAppointmentDriverController);
 
 //For public folder access.
 app.use(express.static("public"));

@@ -24,79 +24,132 @@
     <!-- Main Content-->
     <hr/>
     <main>
-        <form action="/updateData" method="POST">
-            <div class="fillup-form">
-                <div class="personal-info">
-                    <div class="item-1">
-                        <div class="input-group">
-                            <input type="text" id="fName" name="fName" required class="input">
-                            <label for="first-name" class="input-label">First Name</label>
-                        </div>
-                    </div>
-                    <div class="item-1">
-                        <div class="input-group">
-                            <input type="text" id="lName" name="lName" required class="input">
-                            <label for="last-name" class="input-label">Last Name</label>
-                        </div>
-                    </div>
-                    <div class="item-1">
-                        <div class="input-group">
-                            <input type="number" id="sin" name="sin" required class="input">
-                            <label for="sin" class="input-label">SIN</label>
-                        </div>
-                    </div>
-                    <div class="item-1">
-                        <div class="input-group">
-                            <input type="text" id="lNumber" name="lNumber" required class="input">
-                            <label for="License-number" class="input-label">License-Number</label>
-                        </div>
-                    </div>
-                    <div class="item-1">
-                        <div class="input-group">
-                            <input type="number" id="age" name="age" required class="input">
-                            <label for="age" class="input-label" min="18" max="99">Age</label>
-                        </div>
-                    </div>
-                    <div class="item-1">
-                        <div class="input-group">
-                            <input type="text" id="dob" name="dob" required class="input">
-                            <label for="dob" class="input-label">Date Of Birth</label>
-                        </div>
-                    </div>
-                    
+      
+        
+          
+            
+        <div>
+          <h4 class="mb-5 text-center fs-2 text-black">Personal Information</h4>
+          <div>
+            <% if(appointment != null){%>
+              <form action="/updateData" method="POST">
+                <% } else{ %> 
+                  <form class="row g-3" action="/getAppointmentDriver" method="GET">
+                    <% } %> 
+                    <div class="personal-info">
+                      <div class="item-1">
+                          <div class="input-group">
+                              <input type="text" id="fName" name="fName"  class="input">
+                              <label for="first-name" class="input-label">First Name</label>
+                          </div>
+                      </div>
+                      <div class="item-1">
+                          <div class="input-group">
+                              <input type="text" id="lName" name="lName"  class="input">
+                              <label for="last-name" class="input-label">Last Name</label>
+                          </div>
+                      </div>
+                      <div class="item-1">
+                          <div class="input-group">
+                              <input type="number" id="sin" name="sin"  class="input">
+                              <label for="sin" class="input-label">SIN</label>
+                          </div>
+                      </div>
+                      <div class="item-1">
+                          <div class="input-group">
+                              <input type="text" id="lNumber" name="lNumber"  class="input">
+                              <label for="License-number" class="input-label">License-Number</label>
+                          </div>
+                      </div>
+                      <div class="item-1">
+                          <div class="input-group">
+                              <input type="number" id="age" name="age"  class="input">
+                              <label for="age" class="input-label" min="18" max="99">Age</label>
+                          </div>
+                      </div>
+                      <!-- <div class="item-1">
+                          <div class="input-group">
+                              <input type="text" id="dob" name="dob" required class="input">
+                              <label for="dob" class="input-label">Date Of Birth</label>
+                          </div>
+                      </div> -->
+                      
+                  </div>
+          </div>
+        </div>
+
+
+        <div>
+          <h4 class="mb-5 text-center fs-2 text-black">Car Information</h4>
+          <div>
+            <div class="car-info">
+              <div class="item-2">
+                  <div class="input-group">
+                      <input type="text" id="make" name="make"  class="input">
+                      <label for="make" class="input-label">Make</label>
+                  </div>
+              </div>
+              <div class="item-2">
+                  <div class="input-group">
+                      <input type="text" id="model" name="model"  class="input">
+                      <label for="model" class="input-label">Model</label>
+                  </div>
+              </div>
+              <div class="item-2">
+                  <div class="input-group">
+                      <input type="text" id="year" name="year"  class="input">
+                      <label for="year" class="input-label">Year</label>
+                  </div>
+              </div>
+              <div class="item-2">
+                  <div class="input-group">
+                      <input type="text" id="plateNo" name="plateNo"  class="input">
+                      <label for="plateNo" class="input-label">Plate-Number</label>
+                  </div>          
+              </div>
+          </div>
+      </div>
+            <h3 class="mb-5 text-center fs-2 text-black">Appointment Booking</h3>
+            <div>
+              <%if(appointment != null){%>
+              <div>
+                <label for="date" class="form-label">Date</label>
+                <input readonly type="text" id="date" name="date" value="<%= date %>"
+                  min="<%=new Date().toISOString().split('T')[0]%>"
+                />
+              </div>
+              <div>
+                  <label for="time" class="form-label">Time</label>
+                  <%if(appointment != ""){%>
+                  <select id="time" class="form-control mt-2" name="time">
+                    <% for(let i = 0;i<appointment.length;i++){%>
+                      <option ><%=appointment[i]%></option>
+                    <% }%></select><%}else{ %> 
+                      <h2  class="mb-5 text-center fs-2 text-black">No slots are available on this day!! You can Try on another day.</h2>
+                        <a href="/g2"  class="mb-5 text-center fs-2 text-black">Click Here to select another date.</a>
+                      <%}%>
+                  
                 </div>
-                <div class="car-info">
-                    <div class="item-2">
-                        <div class="input-group">
-                            <input type="text" id="make" name="make" required class="input">
-                            <label for="make" class="input-label">Make</label>
-                        </div>
-                    </div>
-                    <div class="item-2">
-                        <div class="input-group">
-                            <input type="text" id="model" name="model" required class="input">
-                            <label for="model" class="input-label">Model</label>
-                        </div>
-                    </div>
-                    <div class="item-2">
-                        <div class="input-group">
-                            <input type="text" id="year" name="year" required class="input">
-                            <label for="year" class="input-label">Year</label>
-                        </div>
-                    </div>
-                    <div class="item-2">
-                        <div class="input-group">
-                            <input type="text" id="plateNo" name="plateNo" required class="input">
-                            <label for="plateNo" class="input-label">Plate-Number</label>
-                        </div>          
-                    </div>
-                </div>
-            </div>
-            <div class="f-submit">
+                <div class="f-submit">
+                  <button type="submit" id="submit" class="submit"></button>
+              </div>
+                <%} else{%>
+              <div>
+                <label for="date"  class="form-label text-black">Date</label>
+                <input type="date"  id="date" name="date"
+                  min="<%=new Date().toISOString().split('T')[0]%>"
+                />
+              </div>
+              <div class="f-submit">
                 <button type="submit" id="submit" class="submit"></button>
             </div>
-        </form>
-    </main>
+              <% } %>
+              </div>
+            </form>
+          </div>
+        </div>
+
+</main>
     <!-- Footer-->
     <%- include('layouts/footer'); -%>
     <!-- Replace with ejs -->
